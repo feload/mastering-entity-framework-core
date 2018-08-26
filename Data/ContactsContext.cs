@@ -7,5 +7,6 @@ namespace ContactsCore.Data
     {
 
     }
+    public DbSet<Person> People { get; set; }
   }
 }
