@@ -16,11 +16,13 @@ namespace ContactsCore.Controllers
         {
             _context = context;
         }
+
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public IEnumerable<Person> Get()
         {
-            return new string[] { "value1", "value2" };
+            var people = _context.People.ToList();
+            return people;
         }
 
         // GET api/values/5
@@ -32,8 +34,11 @@ namespace ContactsCore.Controllers
 
         // POST api/values
         [HttpPost]
-        public void Post([FromBody] string value)
+        public async Task<Person> Post(Person person)
         {
+            _context.People.Add(person);
+            await _context.SaveChangesAsync();
+            return person;
         }
 
         // PUT api/values/5
