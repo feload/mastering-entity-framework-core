@@ -4,14 +4,16 @@ using ContactsCore.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ContactsCore.Migrations
 {
     [DbContext(typeof(ContactsContext))]
-    partial class ContactsContextModelSnapshot : ModelSnapshot
+    [Migration("20180827132933_AddPersonPhoneAndType")]
+    partial class AddPersonPhoneAndType
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -40,11 +42,7 @@ namespace ContactsCore.Migrations
                         .IsRequired()
                         .HasMaxLength(35);
 
-                    b.Property<int?>("PersonTypeId");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("PersonTypeId");
 
                     b.ToTable("Person");
                 });
@@ -64,26 +62,6 @@ namespace ContactsCore.Migrations
                     b.HasIndex("PersonId");
 
                     b.ToTable("PersonPhone");
-                });
-
-            modelBuilder.Entity("ContactsCore.PersonType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("PersonType");
-                });
-
-            modelBuilder.Entity("ContactsCore.Person", b =>
-                {
-                    b.HasOne("ContactsCore.PersonType", "PersonType")
-                        .WithMany("People")
-                        .HasForeignKey("PersonTypeId");
                 });
 
             modelBuilder.Entity("ContactsCore.PersonPhone", b =>

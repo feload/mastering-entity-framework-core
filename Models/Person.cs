@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace ContactsCore
@@ -18,5 +19,9 @@ namespace ContactsCore
       public decimal Height { get; set; }
       public bool IsActive { get; set; }
       public DateTime BirthDate { get; set; }
+
+      public PersonType PersonType { get; set; }
+      public ICollection<PersonPhone> Phones { get; set; }
+
     }
 }
