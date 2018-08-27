@@ -8,5 +8,9 @@ namespace ContactsCore.Data
 
     }
     public DbSet<Person> People { get; set; }
+
+    protected override void OnModelCreating (ModelBuilder modelBuilder)
+    {
+    }
   }
 }
